@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#1b1146">
+<title>샷핑! — 새총 쇼핑 슈팅</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- 게임 레이어 (하늘 · 새총 · 타겟 · 화살) -->
+  <canvas id="stage"></canvas>
+
+  <!-- 상단 HUD -->
+  <header class="hud" id="hud" aria-hidden="true">
+    <div class="hud-row">
+      <div class="pill" id="scorePill"><span>SCORE</span><b id="score">0</b></div>
+      <div class="combo" id="combo"><b id="comboX">x2</b><i>COMBO</i></div>
+      <div class="pill right"><span>TIME</span><b id="time">40</b></div>
+    </div>
+    <div class="timebar"><i id="timefill"></i></div>
+  </header>
+
+  <div class="hint" id="hint"><span class="hand">👆</span>누른 채 <b>뒤로 당겼다</b> 놓으세요</div>
+  <div class="hit-flash" id="hitFlash"></div>
+  <div class="banner" id="banner">TIME UP!</div>
+
+  <!-- 재생 중인 곡 안내 -->
+  <div class="now-playing" id="nowPlaying">
+    <span class="np-eq"><i></i><i></i><i></i><i></i></span>
+    <span class="np-txt">
+      <b>윌리엄 텔 서곡 <em>William Tell Overture</em></b>
+      <span id="npPerformer">로시니 · 미 해병대 군악대</span>
+    </span>
+  </div>
+
+  <!-- 대기 화면 -->
+  <section class="screen attract show" id="scAttract">
+    <div class="card">
+      <p class="eyebrow">새총으로 쏘는 <b>쇼핑 게임</b></p>
+      <h1 class="logo">샷핑<span>!</span></h1>
+      <p class="lead-copy">당겼다 놓으면 화살이 포물선으로 날아가요.<br>
+        <b>화장품·옷</b>은 맞추고, <b class="red">💣 폭탄</b>은 피하세요!</p>
+
+      <div class="lineup" id="lineup"></div>
+      <ul class="rules" id="rules"></ul>
+
+      <button class="btn primary big pulse" id="btnStart">게임 시작 ▶</button>
+      <p class="best" id="bestLine" hidden></p>
+
+      <p class="music-credit">
+        ♪ <b>윌리엄 텔 서곡</b> <i>William Tell Overture</i> — 피날레<br>
+        로시니 作, 1829 · 미 해병대 군악대 연주 (퍼블릭 도메인)
+      </p>
+    </div>
+  </section>
+
+  <!-- 카운트다운 -->
+  <section class="screen count" id="scCount">
+    <div class="count-num" id="countNum">3</div>
+    <p class="count-tip">화면을 누른 채 <b>뒤로 당겼다 놓기</b></p>
+    <p class="count-warn">💣 폭탄을 맞추면 점수가 깎여요</p>
+  </section>
+
+  <!-- 결과 -->
+  <section class="screen result" id="scResult">
+    <div class="card">
+      <p class="eyebrow">TIME UP!</p>
+      <div class="grade" id="rGrade">A</div>
+      <p class="grade-label" id="rGradeLabel">골드 아처</p>
+      <div class="big-score"><b id="rScore">0</b><span>점</span></div>
+      <p class="best" id="rBest"></p>
+
+      <ul class="stats">
+        <li><b id="rHits">0</b><span>타겟 명중</span></li>
+        <li class="bad"><b id="rBombs">0</b><span>폭탄 명중</span></li>
+        <li><b id="rAcc">0%</b><span>명중률</span></li>
+        <li><b id="rCombo">0</b><span>최고 콤보</span></li>
+      </ul>
+
+      <div class="lead-box" id="leadBox"></div>
+
+      <div class="actions">
+        <button class="btn primary" id="btnRetry">다시 하기 🏹</button>
+        <button class="btn ghost" id="btnHome">처음으로</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="sys-btns">
+    <button class="sys-btn" id="btnSound" title="소리">🔊</button>
+    <button class="sys-btn" id="btnFs" title="전체화면">⛶</button>
+  </div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
